@@ -1,0 +1,58 @@
+[
+  {
+    "name": "taiwan_fda_drug_search",
+    "description": "Search the Taiwan FDA register of drug licences (about 66,000 licences: valid, cancelled and revoked) by product name in Chinese or English, active ingredient (as the register writes it, in English capitals), or licence holder or manufacturer. Every word must match the start of a word; Chinese needs two or more characters. Returns each licence's Chinese and English name, active ingredient, holder, licence number, status as the register states it (blank = no cancellation; 已註銷 cancelled; 已廢止 revoked) with an English reading, dosage form, category with an English name, issue and expiry dates; valid licences first, newest first. Use taiwan_fda_drug_get for the full record. Answered from a stored copy of the register; every answer carries its data date.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "query": {
+          "type": "string",
+          "description": "Name, ingredient or company words in Chinese or English, e.g. \"aspirin\", \"阿斯匹靈\" or \"Pfizer\"."
+        },
+        "by": {
+          "type": "string",
+          "enum": [
+            "any",
+            "brand",
+            "ingredient",
+            "holder"
+          ],
+          "description": "Where to look: any (product name, Chinese or English, or active ingredient; default), brand (product name), ingredient, or holder (licence holder or manufacturer name)."
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "active",
+            "cancelled",
+            "revoked",
+            "inactive"
+          ],
+          "description": "Optional: active = licences with no cancellation stated; cancelled (已註銷); revoked (已廢止); inactive = cancelled or revoked. Note an active licence can still be past its expiry date (see expiry_passed)."
+        },
+        "limit": {
+          "type": "number",
+          "description": "Max results (1-50, default 20)."
+        }
+      },
+      "required": [
+        "query"
+      ]
+    }
+  },
+  {
+    "name": "taiwan_fda_drug_get",
+    "description": "Show one Taiwan FDA drug licence by its licence number (from taiwan_fda_drug_search, e.g. \"衛署藥製字第050247號\"). Returns the Chinese and English names, licence type, status as the register states it with an English reading, cancellation date and reason, issue and expiry dates, dosage form, category, controlled-drug class, active ingredients, licence holder with tax id, manufacturers with countries, indications (shortened to about 200 characters) and packaging. Answered from the stored copy; every answer carries its data date.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Licence number, e.g. \"衛署藥製字第050247號\" (full-width digits are fine)."
+        }
+      },
+      "required": [
+        "id"
+      ]
+    }
+  }
+]

@@ -1,0 +1,18 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+  "name": "io.github.pipeworx-io/taiwan-fda-drugs",
+  "title": "Taiwan Fda Drugs",
+  "description": "Taiwan FDA drug licences: the register of every drug licence issued by Taiwan's Food and Drug…",
+  "version": "0.1.0",
+  "websiteUrl": "https://pipeworx.io/packs/taiwan-fda-drugs",
+  "repository": {
+    "url": "https://github.com/pipeworx-io/mcp-taiwan-fda-drugs",
+    "source": "github"
+  },
+  "remotes": [
+    {
+      "type": "streamable-http",
+      "url": "https://gateway.pipeworx.io/taiwan-fda-drugs/mcp"
+    }
+  ]
+}
